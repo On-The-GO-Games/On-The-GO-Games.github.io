@@ -377,15 +377,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Nebula fork: the upstream popunder ad loader was removed. Nothing third-party
   // opens on click anymore.
 
-  // The AdSense account is tied to gointerstellar.app, so forks and mirrors must not serve
-  // it. The tabs page never carried the loader either.
-  if (window.location.hostname === "gointerstellar.app" && !document.getElementById("frame-container")) {
-    const ads = document.createElement("script");
-    ads.async = true;
-    ads.crossOrigin = "anonymous";
-    ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840529569014734";
-    document.head.appendChild(ads);
-  }
 
   const nav = document.querySelector(".nav-bar");
 
@@ -399,6 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="navbar-link" href="/./games"><i class="fa-solid fa-gamepad navbar-icon"></i><span class="nav-label">${obfuscateNav("Games")}</span></a>
         <a class="navbar-link" href="/./apps"><svg class="navbar-icon app-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="8" height="8" rx="2.4"/><rect x="13.5" y="2.5" width="8" height="8" rx="2.4"/><rect x="2.5" y="13.5" width="8" height="8" rx="2.4"/><rect x="13.5" y="13.5" width="8" height="8" rx="2.4" class="app-icon-accent"/></svg><span class="nav-label">${obfuscateNav("Apps")}</span></a>
         <a class="navbar-link" href="/./settings"><i class="fa-solid fa-gear navbar-icon settings-icon"></i><span class="nav-label">${obfuscateNav("Settings")}</span></a>
+        <a class="navbar-link" href="/./faq"><i class="fa-solid fa-circle-question navbar-icon"></i><span class="nav-label">${obfuscateNav("FAQ")}</span></a>
       </div>`;
     nav.innerHTML = html;
   }

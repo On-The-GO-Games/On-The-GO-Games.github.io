@@ -923,7 +923,7 @@ function applyProxyChoiceValues(source) {
 // server, and rewrites the clean route literals in the application JS so the navbar and every
 // in-app navigation point at the same opaque paths. "/" (root) and "/play.html" (a compatibility
 // alias for the games page) are deliberately left clean and are not part of this map.
-const PAGE_ROUTES = ["/apps", "/games", "/tabs", "/settings", "/home"];
+const PAGE_ROUTES = ["/apps", "/games", "/tabs", "/settings", "/home", "/faq"];
 
 function createPageRoutes(registry) {
   const map = {};
@@ -979,9 +979,10 @@ function routeRewriteTable(routes) {
     [`"/tabs"`, `"${routes["/tabs"]}"`],
     [`"/home"`, `"${routes["/home"]}"`],
     [`"tabs"`, `"${routes["/tabs"]}"`],
+    [`"/./faq"`, `"${routes["/faq"]}"`],
   ];
 }
-const ROUTE_REWRITE_COUNT = 16;
+const ROUTE_REWRITE_COUNT = 17;
 
 function applyRouteRewrites(source, table) {
   let count = 0;
@@ -1675,7 +1676,7 @@ function formatKb(bytes) {
   return `${(bytes / 1024).toFixed(1)}kb`;
 }
 
-const SERVED_PAGES = { "/apps": "apps.html", "/games": "games.html", "/settings": "settings.html", "/tabs": "tabs.html", "/home": "home.html" };
+const SERVED_PAGES = { "/apps": "apps.html", "/games": "games.html", "/settings": "settings.html", "/tabs": "tabs.html", "/home": "home.html", "/faq": "faq.html" };
 async function verifyRuntimeMap(manifest) {
   const map = createRequire(import.meta.url)(path.join(RUNTIME_DIR, "vendor-map.cjs"));
   const failures = [];

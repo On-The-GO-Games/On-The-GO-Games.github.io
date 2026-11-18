@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/wrangler/config-schema.json",
-  "name": "interstellar",
+  "name": "nebula",
   "main": "../src/server.js",
   "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2026-09-27",

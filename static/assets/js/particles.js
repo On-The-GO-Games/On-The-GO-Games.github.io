@@ -209,7 +209,7 @@ function initAuroraParticles() {
   const time = gl.getUniformLocation(program, "u_time");
   const ratio = gl.getUniformLocation(program, "u_ratio");
   const color = gl.getUniformLocation(program, "u_color");
-  const sessionStateKey = "interstellar-particle-session";
+  const sessionStateKey = "nebula-particle-session";
   let timeOffset = 0;
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -565,7 +565,7 @@ function initShimmeringDotsSource() {
   let lastPattern = settings.pattern;
   const tau = Math.PI * 2;
   const clamp01 = value => Math.max(0, Math.min(1, value));
-  const sessionStateKey = "interstellar-particle-session";
+  const sessionStateKey = "nebula-particle-session";
 
   function saveParticleState() {
     try {

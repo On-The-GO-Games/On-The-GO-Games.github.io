@@ -55,16 +55,11 @@ if (!inFrame && !navigator.userAgent.includes("Firefox") && store.get("ab") === 
 }
 
 const SplashT = [
-  "Over 8 Million Users since 2023",
-  "Fastest growing proxy server",
-  "Made by xBubbo",
-  "Check out discord.gg/interstellar :)",
+  "Free and open source",
+  "Need a game? Use Request A Game on the Games page",
+  "Check out the FAQ to see where Nebula comes from",
   "Thanks for using the site",
-  "Follow us on Tiktok (@useinterstellar)",
-  "Subscribe to us on YouTube (@unblocking)",
-  "Subscribe to my Youtube (@xbubbo)",
   "Check out the settings page",
-  "Check out our Patreon (https://www.patreon.com/gointerstellar)",
 ];
 
 let SplashI = Math.floor(Math.random() * SplashT.length);

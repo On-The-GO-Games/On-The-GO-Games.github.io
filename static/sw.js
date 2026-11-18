@@ -8,7 +8,7 @@ const uv = new UVServiceWorker();
 const sj = new ScramjetServiceWorker();
 
 sj.addEventListener("handleResponse", event => {
-  const kind = event.rawResponse.rawHeaders?.["x-interstellar-block"];
+  const kind = event.rawResponse.rawHeaders?.["x-nebula-block"];
   if (!kind) return;
   if (["document", "iframe"].includes(event.destination)) {
     const page = kind === "not-found" ? "/not-found.html" : "/block.html";

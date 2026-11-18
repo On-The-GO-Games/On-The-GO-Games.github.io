@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebula</title>
+  <style>
+    :root {
+      --bg: #03060d;
+      --card: #0a1628;
+      --border: rgba(0, 170, 255, 0.35);
+      --text: #e6f3ff;
+      --muted: #7fa6cc;
+      --accent: #00aaff;
+      --accent-hover: #5fd0ff;
+      --ok: #36e0a0;
+      --bad: #ff4d6d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 30% 15%, #0d1f3a, var(--bg) 70%);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+    }
+    main {
+      width: min(560px, 92vw);
+      padding: 36px 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 0 24px rgba(0, 140, 255, 0.18);
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo svg { width: 48px; height: 48px; filter: drop-shadow(0 0 8px rgba(0, 170, 255, 0.65)); }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 5px;
+      background: linear-gradient(90deg, #ffffff, #00aaff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    p { color: var(--muted); line-height: 1.55; }
+    label { display: block; margin: 22px 0 8px; font-weight: 700; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #0b1a2e;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font: inherit;
+    }
+    input:focus { outline: none; border-color: var(--accent-hover); box-shadow: 0 0 12px rgba(0, 170, 255, 0.35); }
+    .row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    button, .btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      background: rgba(0, 170, 255, 0.14);
+      color: var(--text);
+      font: 700 15px Inter, system-ui, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button:hover, .btn:hover { background: rgba(0, 170, 255, 0.3); box-shadow: 0 0 14px rgba(0, 170, 255, 0.35); }
+    .status { margin-top: 18px; font-size: 14px; min-height: 20px; }
+    .status.ok { color: var(--ok); }
+    .status.bad { color: var(--bad); }
+    details { margin-top: 26px; color: var(--muted); font-size: 14px; }
+    summary { cursor: pointer; color: var(--accent-hover); }
+    code { color: var(--text); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fe9ff"/><stop offset="1" stop-color="#0a64ff"/></linearGradient>
+          <linearGradient id="m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#7fdcff"/></linearGradient>
+        </defs>
+        <polygon points="32,3 58,18 58,46 32,61 6,46 6,18" fill="#03060d" stroke="url(#r)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M22 44 V20 L42 44 V20" fill="none" stroke="url(#m)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>NEBULA</h1>
+    </div>
+
+    <p>Enter the address of the Nebula server, then open the site. The server address is remembered in this browser.</p>
+
+    <label for="server">Server address</label>
+    <input id="server" type="url" placeholder="https://your-server-address" autocomplete="off" spellcheck="false" />
+
+    <div class="row">
+      <button id="check" type="button">Check server</button>
+      <button id="open" type="button">Open Nebula</button>
+    </div>
+    <p id="status" class="status" role="status"></p>
+
+    <details>
+      <summary>How do I get a server address?</summary>
+      <p>
+        <strong>Codespace:</strong> in your Codespace, run <code>pnpm start</code>, then in the Ports tab set port 8080 to
+        <em>Public</em> and copy its address. It stops when the Codespace goes to sleep.
+      </p>
+      <p>
+        <strong>Your computer:</strong> run <code>pnpm start</code> in the project folder, then in a second terminal run
+        <code>cloudflared tunnel --url http://localhost:8080</code>. Cloudflare prints an address ending in
+        <code>trycloudflare.com</code>. That address changes each time you restart the tunnel.
+      </p>
+    </details>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "nebula-server";
+    const input = document.getElementById("server");
+    const status = document.getElementById("status");
+
+    function normalize(raw) {
+      let value = raw.trim();
+      if (!value) return "";
+      if (!/^https?:\/\//i.test(value)) value = "https://" + value;
+      try {
+        const url = new URL(value);
+        return url.origin;
+      } catch {
+        return "";
+      }
+    }
+
+    function setStatus(text, kind) {
+      status.textContent = text;
+      status.className = "status" + (kind ? " " + kind : "");
+    }
+
+    input.value = localStorage.getItem(STORAGE_KEY) || "";
+
+    document.getElementById("check").addEventListener("click", async () => {
+      const origin = normalize(input.value);
+      if (!origin) return setStatus("Enter a valid address first.", "bad");
+      setStatus("Checking " + origin + " ...");
+      try {
+        // no-cors: we only need to know the server answered, not read its response.
+        await fetch(origin + "/", { mode: "no-cors", cache: "no-store" });
+        localStorage.setItem(STORAGE_KEY, origin);
+        setStatus("Server answered. You can open Nebula now.", "ok");
+      } catch {
+        setStatus("No answer from " + origin + ". Check that the server is running and public.", "bad");
+      }
+    });
+
+    document.getElementById("open").addEventListener("click", () => {
+      const origin = normalize(input.value);
+      if (!origin) return setStatus("Enter a valid address first.", "bad");
+      localStorage.setItem(STORAGE_KEY, origin);
+      window.location.href = origin + "/";
+    });
+
+    input.addEventListener("keydown", event => {
+      if (event.key === "Enter") document.getElementById("open").click();
+    });
+  </script>
+</body>
+</html>

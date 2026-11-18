@@ -269,7 +269,7 @@ function isValidUrl(val = "") {
             const kind = message.includes("WispCloseReason(ServerStreamBlockedAddress") ? "blocked"
               : message.includes("WispCloseReason(ServerStreamUnreachable") ? "not-found" : null;
             if (!kind) throw error;
-            return { status: 451, statusText: "Unavailable For Legal Reasons", headers: { "x-interstellar-block": kind }, body: null };
+            return { status: 451, statusText: "Unavailable For Legal Reasons", headers: { "x-nebula-block": kind }, body: null };
           }
         }
       }
@@ -347,6 +347,6 @@ function owningTabsWindow() {
 function askOwningTabs(value) {
   const tabs = owningTabsWindow();
   if (!tabs) return false;
-  tabs.postMessage({ type: "interstellar:tabs-navigate", value }, location.origin);
+  tabs.postMessage({ type: "nebula:tabs-navigate", value }, location.origin);
   return true;
 }

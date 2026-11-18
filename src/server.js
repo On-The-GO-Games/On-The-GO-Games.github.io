@@ -22,6 +22,7 @@ const routes = [
   { path: "/settings", file: "settings.html" },
   { path: "/tabs", file: "tabs.html" },
   { path: "/home", file: "home.html" },
+  { path: "/faq", file: "faq.html" },
   { path: "/", file: "home.html" },
 ];
 
@@ -262,7 +263,7 @@ function workerBasicAuthFailure(request) {
   }
   return new Response("Unauthorized", {
     status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="Interstellar", charset="UTF-8"' },
+    headers: { "WWW-Authenticate": 'Basic realm="Nebula", charset="UTF-8"' },
   });
 }
 
