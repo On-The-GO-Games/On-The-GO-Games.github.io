@@ -1,0 +1,161 @@
+.material-symbols-outlined {
+   font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 48;
+}
+
+img {
+   width: 100%;
+   height: 100%;
+   padding-top: 5px;
+}
+
+/* Floating glass bar: brand on the left, link pill on the right */
+.nav-bar {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 100;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 16px;
+   min-height: 10vh;
+   margin: 15px;
+   padding: 0 18px 0 16px;
+   box-sizing: border-box;
+   font-family: "Inter", sans-serif;
+   background: linear-gradient(135deg, rgba(10, 30, 60, 0.72), rgba(3, 6, 13, 0.82));
+   border: 1px solid var(--border-strong);
+   border-radius: var(--radius-lg);
+   box-shadow: 0 0 24px rgba(0, 140, 255, 0.18), inset 0 1px 0 rgba(127, 224, 255, 0.12);
+   -webkit-backdrop-filter: var(--backdrop-filter);
+   backdrop-filter: var(--backdrop-filter);
+   transition: var(--transition-slow);
+}
+
+/* Brand block: logo + wordmark */
+.brand {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   text-decoration: none;
+   color: var(--text);
+   min-width: 0;
+}
+
+.brand img {
+   width: 40px;
+   height: 40px;
+   padding: 0;
+   flex-shrink: 0;
+   filter: drop-shadow(0 0 8px rgba(0, 170, 255, 0.65));
+   transition: var(--transition);
+}
+
+.brand:hover img {
+   transform: rotate(-8deg) scale(1.06);
+}
+
+.brand-name {
+   font-size: 18px;
+   font-weight: 800;
+   letter-spacing: 5px;
+   background: linear-gradient(90deg, #ffffff, #00aaff);
+   -webkit-background-clip: text;
+   background-clip: text;
+   color: transparent;
+   white-space: nowrap;
+}
+
+/* Link pill */
+.nav-bar-right {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   padding: 4px;
+   border: 1px solid var(--border);
+   border-radius: 999px;
+   background: rgba(0, 20, 40, 0.5);
+}
+
+.navbar-link {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   padding: 8px 16px;
+   border-radius: 999px;
+   color: var(--text-muted);
+   font-size: 13px;
+   font-weight: 700;
+   letter-spacing: 1.5px;
+   text-transform: uppercase;
+   text-decoration: none;
+   white-space: nowrap;
+   transition: var(--transition);
+}
+
+.navbar-link:hover {
+   color: var(--text);
+   background: rgba(0, 170, 255, 0.14);
+   box-shadow: 0 0 14px rgba(0, 170, 255, 0.35);
+}
+
+.navbar-icon {
+   font-size: 14px;
+   color: var(--accent);
+   transition: var(--transition);
+}
+
+/* App-tile icon for the Apps link (inline SVG, matches the font icons' size) */
+.app-icon {
+   width: 14px;
+   height: 14px;
+   fill: currentColor;
+   flex-shrink: 0;
+}
+
+.app-icon-accent {
+   fill: #8fe9ff;
+}
+
+.navbar-link:hover > .navbar-icon {
+   color: var(--accent-hover);
+}
+
+.navbar-link:hover > .settings-icon {
+   animation: spin 0.5s;
+   animation-timing-function: cubic-bezier(0, 1.04, 0.91, 0.99);
+}
+
+@media (max-width: 768px) {
+   .brand-name {
+      display: none;
+   }
+   .navbar-link {
+      padding: 8px 12px;
+   }
+   .nav-label {
+      display: none;
+   }
+   .navbar-icon {
+      margin: 0;
+      font-size: 16px;
+   }
+   .app-icon {
+      width: 16px;
+      height: 16px;
+   }
+}
+
+@keyframes spin {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}

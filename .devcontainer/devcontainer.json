@@ -1,0 +1,17 @@
+{
+  "name": "Nebula",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "postCreateCommand": "npx --yes pnpm@10.33.0 install --frozen-lockfile && npx --yes pnpm@10.33.0 build",
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Nebula",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["biomejs.biome"]
+    }
+  }
+}
